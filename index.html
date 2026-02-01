@@ -7,8 +7,6 @@
 
   <style>
     :root{
-      --bg1:#fff1f6;
-      --bg2:#f3f0ff;
       --card:#ffffffcc;
       --text:#2b2b2b;
       --yes:#ff4d8d;
@@ -27,9 +25,15 @@
       display:grid;
       place-items:center;
       font-family: system-ui, -apple-system, Segoe UI, Roboto;
-      background:
-        radial-gradient(900px 500px at 20% 20%, var(--bg2), transparent 60%),
-        radial-gradient(700px 400px at 80% 80%, var(--bg1), transparent 55%);
+
+      /* BABY PINK BACKGROUND */
+      background: linear-gradient(
+        180deg,
+        #ffe4ec 0%,
+        #ffd1e1 50%,
+        #fff0f5 100%
+      );
+
       overflow:hidden;
       padding: env(safe-area-inset-top) env(safe-area-inset-right)
                env(safe-area-inset-bottom) env(safe-area-inset-left);
@@ -128,7 +132,7 @@
       color:#444;
     }
 
-    /* hint line (RESTORED) */
+    /* hint line */
     .hint{
       position:absolute;
       bottom:14px;
@@ -209,7 +213,6 @@
 
     <button id="noBtn">No 🙈</button>
 
-    <!-- HINT LINE -->
     <div class="hint">
       <span class="dot"></span>
       <span>Try clicking “No”… if you can 😄</span>
@@ -279,7 +282,7 @@
     thankyou.classList.add("show");
   });
 
-  /* initial no position */
+  /* initial no button position */
   setTimeout(()=>{
     noBtn.style.left="60%";
     noBtn.style.top="55%";
