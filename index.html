@@ -85,7 +85,7 @@
     p{
       text-align:center;
       opacity:.85;
-      margin-bottom:14px;
+      margin-bottom:12px;
     }
 
     .stage{
@@ -128,6 +128,28 @@
       color:#444;
     }
 
+    /* hint line (RESTORED) */
+    .hint{
+      position:absolute;
+      bottom:14px;
+      left:50%;
+      transform:translateX(-50%);
+      font-size:13px;
+      opacity:.75;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      user-select:none;
+    }
+
+    .dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background: var(--yes);
+      box-shadow: 0 0 0 6px rgba(255,77,141,.18);
+    }
+
     /* popup bubbles */
     .popup{
       position:absolute;
@@ -146,13 +168,13 @@
       100%{opacity:0; transform:translateY(-20px) scale(.95);}
     }
 
-    /* THANK YOU SCREEN — FIXED */
+    /* THANK YOU SCREEN */
     .thankyou{
-      display:none;              /* hidden initially */
+      display:none;
       position:absolute;
       inset:0;
       z-index:5;
-      background: rgba(255,255,255,.85);
+      background: rgba(255,255,255,.88);
       backdrop-filter: blur(8px);
       place-items:center;
       text-align:center;
@@ -168,18 +190,6 @@
       background: linear-gradient(90deg, var(--yes), #8b5cf6);
       -webkit-background-clip:text;
       color:transparent;
-    }
-
-    .confetti i{
-      position:absolute;
-      width:8px;
-      height:14px;
-      animation: confetti 1.8s linear forwards;
-    }
-
-    @keyframes confetti{
-      from{ transform:translateY(-40px) rotate(0deg); }
-      to{ transform:translateY(500px) rotate(500deg); opacity:0; }
     }
   </style>
 </head>
@@ -199,6 +209,12 @@
 
     <button id="noBtn">No 🙈</button>
 
+    <!-- HINT LINE -->
+    <div class="hint">
+      <span class="dot"></span>
+      <span>Try clicking “No”… if you can 😄</span>
+    </div>
+
     <div class="thankyou" id="thankyou">
       <div>
         <h2>Thank you! 💖</h2>
@@ -210,7 +226,7 @@
 </div>
 
 <script>
-  /* hearts */
+  /* floating hearts */
   const hearts = document.getElementById("hearts");
   for(let i=0;i<16;i++){
     const h=document.createElement("div");
@@ -247,7 +263,10 @@
 
   stage.addEventListener("pointermove",e=>{
     const b=noBtn.getBoundingClientRect();
-    const d=Math.hypot(e.clientX-(b.left+b.width/2), e.clientY-(b.top+b.height/2));
+    const d=Math.hypot(
+      e.clientX-(b.left+b.width/2),
+      e.clientY-(b.top+b.height/2)
+    );
     if(d<140) moveNo(e.clientX,e.clientY);
   });
 
@@ -260,7 +279,7 @@
     thankyou.classList.add("show");
   });
 
-  /* initial no button position */
+  /* initial no position */
   setTimeout(()=>{
     noBtn.style.left="60%";
     noBtn.style.top="55%";
